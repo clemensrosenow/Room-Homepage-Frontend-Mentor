@@ -19,7 +19,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://clemensrosenow.github.io/room-homepage/)
+- Live Site URL: [Room Landing Page](https://clemensrosenow.github.io/room-homepage/)
 
 
 ### Built with
