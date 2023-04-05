@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <meta name="description" content="Responsive Landing Page with sleek animations using Scroll-Snapping and Slide Transitions.">
+  <meta name="author" content="Clemens Rosenow">
+  <meta name="keywords" content="Room Homepage, Frontend Mentor">
+  <title>Room Homepage Smoothly Animated | Frontend Mentor</title>
+</head>
+
+<body>
+  <nav>
+    <button onclick="document.querySelector('nav ul').classList.add('slide-in')">
+      <img src="./images/icon-hamburger.svg"></button>
+    <a href="#"><img src="./images/logo.svg"></a>
+    <img src="./images/icon-hamburger.svg" style="visibility: hidden;">
+    <ul>
+      <button onclick="document.querySelector('nav ul').classList.remove('slide-in')"><img
+          src="./images/icon-close.svg"></button>
+      <a href="#">Home</a>
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="hero-image">
+      <picture>
+        <source media="(min-width: 500px)" srcset="./images/desktop-image-hero-1.jpg">
+        <img src="./images/mobile-image-hero-1.jpg">
+      </picture>
+      <picture>
+        <source media="(min-width: 500px)" srcset="./images/desktop-image-hero-2.jpg">
+        <img src="./images/mobile-image-hero-2.jpg" loading="lazy">
+      </picture>
+      <picture>
+        <source media="(min-width: 500px)" srcset="./images/desktop-image-hero-3.jpg">
+        <img src="./images/mobile-image-hero-3.jpg" loading="lazy">
+      </picture>
+    </div>
+
+    <section class="main-text">
+      <div>
+        <h1>Discover innovative ways to decorate</h1>
+        <p>We provide unmatched quality, comfort, and style for property owners across the country.
+          Our experts combine form and function in bringing your vision to life. Create a room in your
+          own style with our collection and make your property a reflection of you and what you love.</p>
+      </div>
+      <div class="invisible">
+        <h1>We are available all across the globe</h1>
+
+        <p> With stores all over the world, it's easy for you to find furniture for your home or place of business.
+          Locally, we’re in most major cities throughout the country. Find the branch nearest you using our
+          store locator. Any questions? Don't hesitate to contact us today. </p>
+      </div>
+      <div class="invisible">
+        <h1>Manufactured with the best materials</h1>
+
+        <p>Our modern furniture store provide a high level of quality. Our company has invested in advanced technology
+          to ensure that every product is made as perfect and as consistent as possible. With three decades of
+          experience in this industry, we understand what customers want for their home and office. </p>
+      </div>
+
+      <button id="cta">Shop now <img src="./images/icon-arrow.svg"></button>
+
+      <button class="swipe-button" onclick="changeSlide(-1)">
+        <img src="./images/icon-angle-left.svg">
+      </button>
+      <button class="swipe-button" onclick="changeSlide(1)">
+        <img src="./images/icon-angle-right.svg">
+      </button>
+    </section>
+    <img class="left-bottom-image" src="./images/image-about-dark.jpg">
+    <section class="secondary-text">
+      <h2>About our furniture</h2>
+      <p>Our multifunctional collection blends design and function to suit your individual taste.
+        Make each room unique, or pick a cohesive theme that best express your interests and what
+        inspires you. Find the furniture pieces you need, from traditional to contemporary styles
+        or anything in between. Product specialists are available to help you create your dream space.</p>
+    </section>
+    <img class="right-bottom-image" src="./images/image-about-light.jpg">
+  </main>
+
+  <script>
+    const heroImageContainer = document.querySelector(".hero-image")
+    const slideTexts = document.querySelectorAll(".main-text div")
+    const totalSlides = 3
+    let currentSlide = 0
+
+
+    function changeSlide(direction) {
+      let pastSlide = currentSlide
+      currentSlide += direction
+
+      heroImageContainer.scrollBy(direction * heroImageContainer.clientWidth, 0)
+
+      //Edge Cases
+      if (currentSlide === -1) {
+        currentSlide = totalSlides - 1
+        heroImageContainer.scrollTo(heroImageContainer.clientWidth * 3, 0)
+      }
+
+      if (currentSlide === totalSlides) {
+        currentSlide = 0
+        heroImageContainer.scrollTo(0, 0)
+      }
+
+      //Change visible text
+      const animationDuration = 300
+      slideTexts[pastSlide].style.animation = `fade-out ${animationDuration + 20}ms ease-in-out`
+      setTimeout(() => {
+        slideTexts[pastSlide].classList.add("invisible")
+        slideTexts[currentSlide].classList.remove("invisible")
+        slideTexts[currentSlide].style.animation = `fade-in ${animationDuration}ms ease-in-out`
+      }, animationDuration);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      //preloading animation mit Logo & Progressbar
+    })
+
+  </script>
+</body>
+
+</html>
